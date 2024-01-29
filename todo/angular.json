@@ -91,11 +91,34 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
+        "wdio-run": {
+          "builder": "@wdio/schematics:wdio",
+          "options": {
+            "devServerTarget": "todo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "todo:serve:production"
+            }
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "927d70b2-cb70-44e6-8ec2-61465305c954"
+    "analytics": "927d70b2-cb70-44e6-8ec2-61465305c954",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
