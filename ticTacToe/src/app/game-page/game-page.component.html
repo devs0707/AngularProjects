@@ -1,0 +1,51 @@
+<h1>Welcome to Tic Tac Toe game!</h1>
+<div class="container">
+    <form style="padding-top: 3%;">
+        <div class="container" *ngIf="!isUserNameAvail">
+            Please Enter First User Name:
+            <input type="text" name="userOne" [(ngModel)]="userOne" />
+
+            Please Enter Second User Name:
+            <input type="text" name="userTwo" [(ngModel)]="userTwo" />
+
+            <button type="button" class="btn btn-success" (click)=submitUserName()>Submit</button>
+        </div>
+        <div class="container" *ngIf="isUserNameAvail">
+            <table class="table" border="1">
+                <thead>
+                    <tr>
+                        <th>Users</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.userName | uppercase}}</td>
+                        <td>{{user.score}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container" *ngIf="isUserNameAvail">
+            <h3>{{message}}</h3>
+            <div class="board" [ngClass]="{'disabled': disableGame}">
+                <div *ngFor="let i of tempRows">
+                    <div class="row">
+                        <div class="cell"><input type="button" name="btn00" class="btn" (click)=changeValue(btn[i][0])
+                                [ngClass]="{'btn-primary' : btn[i][0].state === 1, 'btn-secondary': btn[i][0].state === 2, 'btn-warning': btn[i][0].state=== 0, 'disabled': !(btn[i][0].state === 0) || disableGame}"
+                                [value]="btn[i][0].state === 1 ? 'X' : btn[i][0].state === 2 ? 'O' : ''"></div>
+                        <div class="cell"><input type="button" name="btn01" class="btn" (click)=changeValue(btn[i][1])
+                                [ngClass]="{'btn-primary' : btn[i][1].state === 1, 'btn-secondary': btn[i][1].state === 2, 'btn-warning': btn[i][1].state=== 0, 'disabled': !(btn[i][1].state === 0) || disableGame}"
+                                [value]="btn[i][1].state === 1 ? 'X' : btn[i][1].state === 2 ? 'O' : ''"></div>
+                        <div class="cell"><input type="button" name="btn02" class="btn" (click)=changeValue(btn[i][2])
+                                [ngClass]="{'btn-primary' : btn[i][2].state === 1, 'btn-secondary': btn[i][2].state === 2, 'btn-warning': btn[i][2].state=== 0, 'disabled': !(btn[i][2].state === 0) || disableGame}"
+                                [value]="btn[i][2].state === 1 ? 'X' : btn[i][2].state === 2 ? 'O' : ''"></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-success" (click)=resetGame()>Reset Game</button>
+        </div>
+    </form>
+</div>
